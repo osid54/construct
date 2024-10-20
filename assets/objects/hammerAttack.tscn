@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bffuno3ktj8ee"]
+
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_4catj"]
+[ext_resource type="Script" path="res://scripts/hammer_attack.gd" id="1_oblr3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agsjf"]
+radius = 27.0
+height = 76.0
+
+[node name="hamAttack" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_oblr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4catj")
+hframes = 18
+vframes = 9
+frame = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_agsjf")

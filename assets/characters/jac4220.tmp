@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://jpa8nm4jjs6k"]
+
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_0ad2r"]
+[ext_resource type="Script" path="res://scripts/jack.gd" id="1_kuict"]
+[ext_resource type="PackedScene" uid="uid://1jkn1spbvqp3" path="res://assets/characters/hurtbox.tscn" id="2_54pgn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rwge"]
+size = Vector2(46, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7a5d"]
+size = Vector2(90, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7t8s"]
+size = Vector2(550, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghla0"]
+size = Vector2(138, 37)
+
+[node name="jack" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+platform_floor_layers = 2
+script = ExtResource("1_kuict")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_6rwge")
+
+[node name="jack" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ad2r")
+hframes = 18
+vframes = 9
+frame = 15
+
+[node name="face" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ad2r")
+hframes = 9
+vframes = 9
+frame = 5
+
+[node name="hurtbox" parent="face" instance=ExtResource("2_54pgn")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="face/hurtbox"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_l7a5d")
+
+[node name="searchArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="searchArea"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_x7t8s")
+
+[node name="hurtbox" parent="." instance=ExtResource("2_54pgn")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, 35.5)
+shape = SubResource("RectangleShape2D_ghla0")
+
+[connection signal="area_entered" from="searchArea" to="." method="playerFound"]

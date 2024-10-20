@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://chqlv5urtooge"]
+
+[ext_resource type="Script" path="res://scripts/buzz.gd" id="1_344w8"]
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_743k2"]
+[ext_resource type="PackedScene" uid="uid://1jkn1spbvqp3" path="res://assets/characters/hurtbox.tscn" id="2_w7jsg"]
+[ext_resource type="PackedScene" uid="uid://buh7df2sxrd17" path="res://assets/characters/hitbox.tscn" id="4_00hqr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4erf2"]
+radius = 35.0143
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m5sdg"]
+radius = 290.016
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p8wbg"]
+radius = 44.0114
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8j6l8"]
+radius = 44.0454
+
+[node name="buzz" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_344w8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4erf2")
+
+[node name="saw" type="Sprite2D" parent="."]
+texture = ExtResource("1_743k2")
+hframes = 9
+vframes = 9
+frame = 6
+
+[node name="face" type="Sprite2D" parent="."]
+texture = ExtResource("1_743k2")
+offset = Vector2(18, 0)
+hframes = 18
+vframes = 9
+frame = 14
+
+[node name="searchArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="searchArea"]
+shape = SubResource("CircleShape2D_m5sdg")
+
+[node name="RayCast2D" type="RayCast2D" parent="searchArea"]
+collision_mask = 2
+
+[node name="hurtbox" parent="." instance=ExtResource("2_w7jsg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_p8wbg")
+
+[node name="hitbox" parent="." instance=ExtResource("4_00hqr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_8j6l8")
+
+[connection signal="body_entered" from="searchArea" to="." method="playerFound"]
+[connection signal="body_exited" from="searchArea" to="." method="playLeft"]

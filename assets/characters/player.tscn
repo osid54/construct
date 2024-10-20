@@ -1,0 +1,343 @@
+[gd_scene load_steps=9 format=3 uid="uid://btthtgp7uvlx3"]
+
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_8rrja"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_nsp37"]
+
+[sub_resource type="Animation" id="Animation_vp6wt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("handBPath/PathBFollow:progress_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("handFPath/handFFollow:progress_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_pcnpi"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.984375, 0.960938), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2.5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ma3gy"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 1, 3, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.984375), Vector2(1, 1), Vector2(1, 0.984375), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("handBPath/PathBFollow:progress_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.0, 0.5, 1.0, 0.5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("handFPath/handFFollow:progress_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 1.0, 0.5, 0.0, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vciq"]
+_data = {
+"RESET": SubResource("Animation_vp6wt"),
+"idle": SubResource("Animation_pcnpi"),
+"walk": SubResource("Animation_ma3gy")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cap8x"]
+radius = 24.0
+height = 82.0
+
+[sub_resource type="Curve2D" id="Curve2D_jgybx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -25, 14, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 24, 14)
+}
+point_count = 3
+
+[node name="player" type="CharacterBody2D"]
+collision_mask = 22
+script = ExtResource("1_nsp37")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4vciq")
+}
+autoplay = "idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8rrja")
+hframes = 9
+vframes = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cap8x")
+
+[node name="jumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="groundTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="handFPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jgybx")
+
+[node name="handFFollow" type="PathFollow2D" parent="handFPath"]
+position = Vector2(-0.410316, 24.9631)
+rotation = 0.414507
+progress = 26.8569
+
+[node name="handF" type="Sprite2D" parent="handFPath/handFFollow"]
+texture = ExtResource("1_8rrja")
+offset = Vector2(-8, 0)
+hframes = 18
+vframes = 18
+frame = 8
+
+[node name="toolF" type="Sprite2D" parent="handFPath/handFFollow/handF"]
+show_behind_parent = true
+texture = ExtResource("1_8rrja")
+offset = Vector2(-8, -5.255)
+hframes = 18
+vframes = 18
+frame = 26
+
+[node name="handBPath" type="Path2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -4)
+curve = SubResource("Curve2D_jgybx")
+
+[node name="PathBFollow" type="PathFollow2D" parent="handBPath"]
+show_behind_parent = true
+position = Vector2(-0.410316, 24.9631)
+rotation = 0.414507
+progress = 26.8569
+
+[node name="handB" type="Sprite2D" parent="handBPath/PathBFollow"]
+show_behind_parent = true
+texture = ExtResource("1_8rrja")
+offset = Vector2(-8, 0)
+hframes = 18
+vframes = 18
+frame = 8
+
+[node name="toolB" type="Sprite2D" parent="handBPath/PathBFollow/handB"]
+texture = ExtResource("1_8rrja")
+offset = Vector2(13, -7.625)
+hframes = 18
+vframes = 18
+frame = 27
+
+[node name="attackHand" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(34, 30)
+rotation = 2.35619
+texture = ExtResource("1_8rrja")
+offset = Vector2(-8, 0)
+hframes = 18
+vframes = 18
+frame = 8
+
+[node name="tool" type="Sprite2D" parent="attackHand"]
+show_behind_parent = true
+texture = ExtResource("1_8rrja")
+offset = Vector2(13, -7.625)
+hframes = 18
+vframes = 18
+frame = 27
+
+[node name="wTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 392.0
+offset_bottom = 128.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer/Panel"]
+texture = ExtResource("1_8rrja")
+offset = Vector2(64, 64)
+hframes = 9
+vframes = 9
+frame = 12
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer/Panel2"]
+texture = ExtResource("1_8rrja")
+offset = Vector2(64, 64)
+hframes = 9
+vframes = 9
+frame = 12
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer/Panel3"]
+texture = ExtResource("1_8rrja")
+offset = Vector2(64, 64)
+hframes = 9
+vframes = 9
+frame = 12
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -39.0
+offset_right = 197.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "find your lost lunchbox"

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgsym0dtfawgq"]
+
+[ext_resource type="Shader" path="res://shaders/float.gdshader" id="1_egmys"]
+[ext_resource type="Script" path="res://scripts/nut.gd" id="1_mb15w"]
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="2_fo6dh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8slp8"]
+shader = ExtResource("1_egmys")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvrae"]
+radius = 29.1548
+
+[node name="nut" type="Area2D"]
+script = ExtResource("1_mb15w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8slp8")
+texture = ExtResource("2_fo6dh")
+hframes = 18
+vframes = 18
+frame = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dvrae")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

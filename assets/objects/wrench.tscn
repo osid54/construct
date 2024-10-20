@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp16exij3t20i"]
+
+[ext_resource type="Script" path="res://scripts/wrench.gd" id="1_0hvm3"]
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_wicqo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhk84"]
+radius = 29.14
+
+[node name="wrench" type="Area2D"]
+collision_layer = 8
+collision_mask = 64
+script = ExtResource("1_0hvm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nhk84")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wicqo")
+offset = Vector2(11, 0)
+hframes = 18
+vframes = 18
+frame = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0.498039)
+show_behind_parent = true
+rotation = 2.0944
+texture = ExtResource("1_wicqo")
+offset = Vector2(11, 0)
+hframes = 18
+vframes = 18
+frame = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Sprite2D"]
+modulate = Color(1, 1, 1, 0.498039)
+show_behind_parent = true
+rotation = 2.0944
+texture = ExtResource("1_wicqo")
+offset = Vector2(11, 0)
+hframes = 18
+vframes = 18
+frame = 27

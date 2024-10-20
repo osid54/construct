@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://jpa8nm4jjs6k"]
+
+[ext_resource type="Texture2D" uid="uid://cc82aaa431bo8" path="res://src/sprites/sheet.png" id="1_0ad2r"]
+[ext_resource type="Script" path="res://scripts/jack.gd" id="1_kuict"]
+[ext_resource type="PackedScene" uid="uid://1jkn1spbvqp3" path="res://assets/characters/hurtbox.tscn" id="2_54pgn"]
+[ext_resource type="PackedScene" uid="uid://buh7df2sxrd17" path="res://assets/characters/hitbox.tscn" id="4_ypeig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rwge"]
+size = Vector2(46, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7a5d"]
+size = Vector2(90, 35.9966)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7t8s"]
+size = Vector2(550, 101)
+
+[sub_resource type="Animation" id="Animation_p4pms"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("face:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 24), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_usbr3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("face:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4r6r"]
+_data = {
+"RESET": SubResource("Animation_usbr3"),
+"idle": SubResource("Animation_p4pms")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghla0"]
+size = Vector2(138, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34qyy"]
+size = Vector2(46, 101)
+
+[node name="jack" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+platform_floor_layers = 2
+script = ExtResource("1_kuict")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_6rwge")
+
+[node name="jack" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ad2r")
+hframes = 18
+vframes = 9
+frame = 15
+
+[node name="face" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ad2r")
+hframes = 9
+vframes = 9
+frame = 5
+
+[node name="hurtbox" parent="face" instance=ExtResource("2_54pgn")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="face/hurtbox"]
+position = Vector2(0, -28.0017)
+shape = SubResource("RectangleShape2D_l7a5d")
+
+[node name="searchArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="searchArea"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_x7t8s")
+
+[node name="RayCast2D" type="RayCast2D" parent="searchArea"]
+collision_mask = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v4r6r")
+}
+autoplay = "idle"
+
+[node name="hurtbox2" parent="." instance=ExtResource("2_54pgn")]
+visible = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox2"]
+position = Vector2(0, 35.5)
+shape = SubResource("RectangleShape2D_ghla0")
+
+[node name="hitbox" parent="." instance=ExtResource("4_ypeig")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_34qyy")
+
+[connection signal="body_entered" from="searchArea" to="." method="playerFound"]
+[connection signal="body_exited" from="searchArea" to="." method="playLeft"]
